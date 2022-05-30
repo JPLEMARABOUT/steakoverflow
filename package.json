@@ -1,0 +1,14 @@
+{
+  "name": "projet_cesi",
+  "version": "1.0.0",
+  "description": "Applicatio back pour le proyo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "G5",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
