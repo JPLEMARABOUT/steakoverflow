@@ -42,15 +42,21 @@ class MongoAccess{
         })
     }
 
+    async deleteEntry(constraint){
+        await this.#genericFunction((dbo)=>{
+            dbo.collection("resto").deleteMany(constraint);
+        });
+    }
+
     async dropDb(){
         await this.#genericFunction((dbo)=>{
             dbo.collection("resto").drop();
         });
     }
 
-    async findSpecific(){
+    async findSpecific(constraint){
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").findOne({id:0}, (err, result)=>{
+            dbo.collection("resto").findOne(constraint, (err, result)=>{
                 console.log(result)
             });
         });
