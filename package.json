@@ -9,6 +9,7 @@
   "author": "G5",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongodb": "^4.6.0"
   }
 }
