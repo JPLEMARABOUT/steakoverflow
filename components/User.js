@@ -9,10 +9,19 @@ class User{
     birthdate;
     prenom;
     nom;
+    id;
 
-    jsonise(){
-        return JSON.stringify({"Token":this.token, "Username": this.username, "Email": this.email, "Password" : this.password,
-            "Birthdate" : this.birthdate, "Prenom" : this.prenom, "Nom" : this.nom});
+    constructor(formData) {
+        if (formData.id === undefined) {
+            let cyph = new Transcoder();
+            this.id = cyph.base64Encode(cyph.sha256cyph(JSON.stringify(this.serialize())))
+        } else {
+            this.id = formData.id;
+        }
+    }
+
+    serialize (){
+        return Object.fromEntries(Object.entries(this));
     }
 
     hashPass(){

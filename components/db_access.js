@@ -1,3 +1,5 @@
+const $ = jQuery = require("jquery");
+
 class Db_access {
 
 

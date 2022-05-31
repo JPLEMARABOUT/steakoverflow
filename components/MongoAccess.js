@@ -42,15 +42,17 @@ class MongoAccess{
         })
     }
 
-    async deleteEntry(constraint){
+    async update(obj, id){ //todo : faire marcher le update
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").deleteMany(constraint);
+           dbo.collection("resto").updateOne({id:id}, {
+               $set : {}
+           });
         });
     }
 
-    async dropDb(){
+    async deleteEntry(constraint){
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").drop();
+            dbo.collection("resto").deleteMany(constraint);
         });
     }
 
@@ -68,6 +70,12 @@ class MongoAccess{
                 if (err) throw err;
                 console.log(result)
             });
+        });
+    }
+
+    async dropDb(){
+        await this.#genericFunction((dbo)=>{
+            dbo.collection("resto").drop();
         });
     }
 
