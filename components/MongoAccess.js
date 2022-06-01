@@ -42,10 +42,10 @@ class MongoAccess{
         })
     }
 
-    async update(obj, id){ //todo : faire marcher le update
+    async update(obj, id){
         await this.#genericFunction((dbo)=>{
            dbo.collection("resto").updateOne({id:id}, {
-               $set : {}
+               $set : obj
            });
         });
     }
@@ -56,10 +56,11 @@ class MongoAccess{
         });
     }
 
-    async findSpecific(constraint){
+    async findSpecific(constraint, callback){
         await this.#genericFunction((dbo)=>{
             dbo.collection("resto").findOne(constraint, (err, result)=>{
-                console.log(result)
+                if (err) throw err;
+                callback(result)
             });
         });
     }

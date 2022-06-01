@@ -10,19 +10,10 @@ const Controller = require("./components/Controller")
 const consts = {"port": 8080}
 
 app.get("/", async (req, res) => {
-    let rest = new resto();
-    await rest.bind({
-        name: "Le Jardin d'Alice",
-        address: "4 Rue Jean-Baptiste Clément",
-        commune: "Villeurbanne",
-        patron: "Alice"
-    });
-    // await rest.insertDb();
-
-
     let mg = new mongo();
-    // await mg.dropDb();
-    await mg.findAll();
+    // await mg.dropDb()
+    await mg.findAll()
+
 
     res.send("yo brat")
 });
@@ -43,6 +34,8 @@ app.post("/signup", (req, res)=>{
 //##############################OFFICIEL API
 
 app.post("/register_resto", Controller.registerRestaurant);
+
+app.post("/update_card", Controller.addRecipe);
 
 app.listen(consts.port, ()=>{
     console.log(`Server serving on port ${consts.port}`);

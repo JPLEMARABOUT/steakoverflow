@@ -2,7 +2,6 @@ const Transcoder = require("./Transcoder");
 
 class User{
 
-    token;
     username;
     email;
     password;

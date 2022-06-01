@@ -19,13 +19,16 @@ class Restaurants extends Structures{
 
     constructor() {
         super();
+        this.carte = {};
     }
 
-    async bind(formData){
+    async bind(formData, calback){
         this.name = formData.name;
         this.address = formData.address;
         this.commune = formData.commune;
-        this.carte = {}
+        if (formData.carte !== undefined){
+            this.carte = formData.carte;
+        }
         this.patron = formData.patron;
 
         if (formData.id === undefined) {
@@ -43,14 +46,33 @@ class Restaurants extends Structures{
         } else {
             this.location = formData.location;
         }
+
+        if (calback !==undefined){
+            await calback(this);
+        }
+    }
+
+    async retrieve(id, params){
+        let mg = new MongoAccess();
+        await mg.findSpecific({id:id}, async (result)=>{
+            let tempCarte = result.carte;
+            for (let elem of Object.keys(params)){
+                tempCarte[elem] = params[elem];
+            }
+            result.carte = tempCarte;
+            await this.bind(result, this.updateMenu);
+        });
     }
 
     serialize (){
         return Object.fromEntries(Object.entries(this))
     }
 
-    async updateMenu(){
-        //todo : mettre en place la possibilité d'update les menus
+    async updateMenu(instance){
+        let mg = new MongoAccess();
+        await mg.findSpecific({id:instance.id}, async (result)=>{
+            await mg.update({carte:instance.carte}, result.id);
+        });
     }
 
     async insertDb() {
