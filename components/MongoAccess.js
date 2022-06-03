@@ -7,13 +7,10 @@ class MongoAccess{
     client;
     database;
 
-    test;
-
-    constructor() {
-        this.test = { id: 0, name: 'Jardin d\'Aline', location:[0,0], address:"33 avenue général de Gaulle", communne:"Villeurbanne", carte : {} }
-
+    constructor(table) {
         this.uri = `mongodb://localhost:27017`;
         this.database = "proyo"
+        this.table = table;
         this.client = new MongoClient(this.uri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -21,22 +18,9 @@ class MongoAccess{
         });
     }
 
-    async connect(){
-        try {
-            await this.client.connect((err, db)=>{
-                actionLogger("Accessing to DB")
-                if (err) throw err;
-                let dbo = db.db(this.database)
-
-            });
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
     async insert(obj){
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").insertOne(obj, (err)=>{
+            dbo.collection(this.table).insertOne(obj, (err)=>{
                 if (err) throw err
             });
         })
@@ -44,7 +28,7 @@ class MongoAccess{
 
     async update(obj, id){
         await this.#genericFunction((dbo)=>{
-           dbo.collection("resto").updateOne({id:id}, {
+           dbo.collection(this.table).updateOne({id:id}, {
                $set : obj
            });
         });
@@ -52,31 +36,31 @@ class MongoAccess{
 
     async deleteEntry(constraint){
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").deleteMany(constraint);
+            dbo.collection(this.table).deleteMany(constraint);
         });
     }
 
     async findSpecific(constraint, callback){
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").findOne(constraint, (err, result)=>{
+            dbo.collection(this.table).findOne(constraint, (err, result)=>{
                 if (err) throw err;
                 callback(result)
             });
         });
     }
 
-    async findAll(){
+    async findAll(callback, constraint){
         await this.#genericFunction((dbo) => {
-            dbo.collection("resto").find({}).toArray((err, result)=>{
+            dbo.collection(this.table).find(constraint).toArray((err, result)=>{
                 if (err) throw err;
-                console.log(result)
+                callback(result)
             });
         });
     }
 
     async dropDb(){
         await this.#genericFunction((dbo)=>{
-            dbo.collection("resto").drop();
+            dbo.collection(this.table).drop();
         });
     }
 
