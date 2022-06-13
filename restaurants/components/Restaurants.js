@@ -1,5 +1,5 @@
-const MongoAccess = require("./MongoAccess");
-const Transcoder = require("./Transcoder");
+const MongoAccess = require("../../generic_components/MongoAccess");
+const Transcoder = require("../../generic_components/Transcoder");
 
 const { JSDOM } = require( "jsdom" );
 const { window } = new JSDOM( "" );

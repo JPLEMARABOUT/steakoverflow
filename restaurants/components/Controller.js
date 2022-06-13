@@ -1,5 +1,5 @@
 const resto = require("./Restaurants");
-const mongo = require("./MongoAccess");
+const mongo = require("../../generic_components/MongoAccess");
 
 //###############################Data retrievance
 
