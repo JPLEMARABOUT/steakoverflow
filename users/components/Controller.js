@@ -2,21 +2,29 @@ const User = require("./User");
 const SGBDRConnect = require("../../generic_components/SGBDRConnect");
 const {generateUserToken, generateRefreshToken, decodeToken} = require("../middleware/TokenGeneration");
 const axios = require("axios");
+const Cypher = require("../../generic_components/Transcoder")
 
 function registerUser(req, res){
     let usr = new User();
     usr.register(JSON.parse(req.query["data"]), async (result)=>{
-        console.log(result.id) //todo : send mail of confirm
-        let mailer = await axios.post(`http://localhost:5000/insert_user?message=${"aaaa"}&dest=${"bbbbb"}`);
-        if (mailer["success"]!==true){
-            let db = new SGBDRConnect();
-            await db.Delete(result.id);
-            res.status(500).send(mailer);
+        try{
+            if (result.id !== undefined){
+                const cyph = new Cypher();
+                let mailer = await axios.post(
+                    `http://localhost:5001/sendmail?message=${cyph.base64Encode(User.generateMessage(result.id))}&dest=${usr.email}&topic=${cyph.base64Encode("Confirmation de la création du compte")}`);
+                mailer = mailer.data
+                if (mailer["Success"]!==true){
+                    let db = new SGBDRConnect();
+                    await db.Delete(result.id);
+                    res.status(500).send(JSON.stringify(mailer));
+                    return
+                }
+                delete result.id;
+            }
+            res.status(200).send(JSON.stringify(result));
+        } catch (e){
+            console.error(e)
         }
-        if (result.id !== undefined){
-            delete result.id;
-        }
-        res.status(200).send(JSON.stringify(result));
     });
 }
 
@@ -69,7 +77,7 @@ async function regenToken(req, res){
 
     const decoded = decodeToken(token);
     let usr = new User();
-    await usr.retrieve(req.query["id"], (result)=>{
+    await usr.retrieve(parseInt(req.query["id"]), (result)=>{
         if (result.id !== undefined){
             res.status(200).send(JSON.stringify({token:generateUserToken(decoded.userId)}));
         } else {
@@ -80,7 +88,7 @@ async function regenToken(req, res){
 
 async function confirmAccount(req, res){
     let usr = new User();
-    await usr.confirm(req.query["id"], (result)=>{
+    await usr.confirm(req.params["id"], (result)=>{
         res.status(200).send(JSON.stringify(result))
     });
 }

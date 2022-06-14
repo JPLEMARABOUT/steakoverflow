@@ -107,6 +107,10 @@ class User{
         return trsc.base64Encode(trsc.sha256cyph(pass));
     }
 
+    static generateMessage(id){
+        return `http://localhost:8081/confirm_account/${id}`;
+    }
+
 }
 
 module.exports = User;

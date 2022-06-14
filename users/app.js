@@ -20,7 +20,7 @@ app.post("/delete", auth, Controller.deleteUser);
 
 app.post("/change_user_elev", auth,Controller.changeUserEleveation);
 
-app.get("/confirm_account", Controller.confirmAccount);
+app.get("/confirm_account/:id", Controller.confirmAccount);
 
 app.post("/regen_token", Controller.regenToken);
 

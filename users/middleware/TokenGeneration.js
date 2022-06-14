@@ -24,7 +24,7 @@ function generateRefreshToken(userId){
 }
 
 function decodeToken(token){
-    return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+    return jwt.verify(token, process.env["REFRESH_TOKEN_KEY"]);
 }
 
 
