@@ -1,0 +1,1 @@
+curl http://localhost:5002/receive_image -F "file=@cuba.jpg" -vvv

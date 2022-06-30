@@ -1,0 +1,15 @@
+users => 8081:8081
+restaurants => 4080:8080
+recipes => 8083:8083
+permissions => 8082:8082
+orders => 8084:8084
+deliveries => 8085:8085
+
+images => 5002:5002
+ceseats => 5000:5000
+mailer => 5000:5001
+
+mongo => 27017:27017
+mysql => 3306:3306
+
+vue => 8079:8079

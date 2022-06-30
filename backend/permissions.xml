@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles>
+    <role>
+        <title>STANDARD_CUSTOMER</title>
+        <rank>0</rank>
+        <permission>FOLLOW_ORDER</permission>
+        <permission>CREATE_ORDER</permission>
+        <permission>REQUEST_DELIVERY</permission>
+    </role>
+    <role>
+        <title>SHOP_OWNER</title>
+        <rank>1</rank>
+        <permission>CREATE_ESTABLISHMENT</permission>
+        <permission>CREATE_RECIPE</permission>
+        <permission>CREATE_MENU</permission>
+        <permission>GET_STAT</permission>
+        <permission>FOLLOW_ORDER</permission>
+        <permission>CONFIRM_ORDER</permission>
+    </role>
+    <role>
+        <title>DELIVERER</title>
+        <rank>2</rank>
+        <permission>RECEIVE_ORDERS</permission>
+        <permission>ACCEPT_DELIVERY</permission>
+    </role>
+    <role>
+        <title>COMMERCIAL</title>
+        <rank>3</rank>
+        <permission>EDIT_CLIENT_ACCOUNT</permission>
+        <permission>READ_CLIENT_ACCOUNT</permission>
+        <permission>GET_STAT</permission>
+        <permission>FOLLOW_ORDER_CLIENT</permission>
+    </role>
+</roles>

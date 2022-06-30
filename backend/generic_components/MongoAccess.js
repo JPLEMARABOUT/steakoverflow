@@ -1,4 +1,9 @@
 const {MongoClient} = require("mongodb");
+let address = "localhost"
+let port = 27017;
+if (process.env.environement==="docker"){
+    address = "host.docker.internal";
+}
 
 class MongoAccess{
 
@@ -7,7 +12,7 @@ class MongoAccess{
     database;
 
     constructor(table) {
-        this.uri = `mongodb://localhost:27017`;
+        this.uri = `mongodb://${address}:${port}`;
         this.database = "proyo"
         this.table = table;
         this.client = new MongoClient(this.uri, {
@@ -57,9 +62,12 @@ class MongoAccess{
         });
     }
 
-    async dropDb(){
+    async findAllSorted(callback, constraint, sort){
         await this.#genericFunction((dbo)=>{
-            dbo.collection(this.table).drop();
+            dbo.collection(this.table).find(constraint).sort(sort).toArray((err, result)=>{
+                if (err) throw err;
+                callback(result)
+            });
         });
     }
 

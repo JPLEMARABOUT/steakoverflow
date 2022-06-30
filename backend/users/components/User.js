@@ -1,5 +1,9 @@
 const Transcoder = require("../../generic_components/Transcoder");
-const SGBDRConnect = require("../../generic_components/SGBDRConnect")
+const SGBDRConnect = require("../../generic_components/SGBDRConnect");
+let address = "localhost";
+if (process.env.environement==="docker"){
+    address = "host.docker.internal";
+}
 
 class User{
 
@@ -60,11 +64,21 @@ class User{
         });
     }
 
-    update(data, webCallback){
-        this.bind(data, async (instance)=>{
-            let db = new SGBDRConnect();
-            await db.Update(JSON.stringify(instance.serialize()), webCallback)
-        });
+    async update(data, webCallback){
+        let db = new SGBDRConnect();
+        await db.getUser(data.id, (result)=>{
+            if (data.password !== undefined){
+                data.password = User.#hashPass(data.password)
+            }
+            const keys = Object.keys(data);
+            for (let elem of keys){
+                result[elem] = data[elem];
+            }
+            this.bind(result, async (instance)=>{
+                let db = new SGBDRConnect();
+                await db.Update(JSON.stringify(instance.serialize()), webCallback)
+            });
+        })
     }
 
     async connect(email, password, webCallback){
@@ -106,11 +120,6 @@ class User{
         let trsc = new Transcoder();
         return trsc.base64Encode(trsc.sha256cyph(pass));
     }
-
-    static generateMessage(id){
-        return `http://localhost:8081/confirm_account/${id}`;
-    }
-
 }
 
 module.exports = User;

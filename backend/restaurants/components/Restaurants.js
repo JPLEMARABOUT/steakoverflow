@@ -12,6 +12,9 @@ class Structures{
     address;
     commune;
     patron;
+    cat;
+    image;
+    description;
 }
 
 class Restaurants extends Structures{
@@ -25,6 +28,9 @@ class Restaurants extends Structures{
         this.address = formData.address;
         this.commune = formData.commune;
         this.patron = formData.patron;
+        this.cat = formData.cat;
+        this.image = formData.image;
+        this.description = formData.description;
 
         if (formData.id === undefined) {
             let cyph = new Transcoder();
@@ -50,6 +56,9 @@ class Restaurants extends Structures{
     async delete(id, patronid){
         let mg = new MongoAccess("resto");
         await mg.findSpecific({id:id}, async (result)=>{
+            if (result === null){
+                return
+            }
             if (patronid !== result.patron){
                 return;
             }
@@ -60,6 +69,9 @@ class Restaurants extends Structures{
     async retrieve(id, params, patronid){
         let mg = new MongoAccess("resto");
         await mg.findSpecific({id:id}, async (result)=>{
+            if (result===null){
+                return;
+            }
             if (patronid !== result.patron){
                 return;
             }

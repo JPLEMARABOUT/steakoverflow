@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Test</title>
+</head>
+<body>
+<input type="file" id="docpicker" accept=".png,.jpg">
+</body>
+<script>
+    async function uploadFile(){
+        let file = document.getElementById("img_sender").files[0]
+        let formData = new FormData();
+        formData.append("file", file);
+        await fetch('http://localhost:5002/receive_image', {
+            mode: 'no-cors',
+            method: "POST",
+            hearder:new Headers({'Content-Type': 'multipart/form-data'}),
+            body: formData
+        });
+        return {success:true, message:"ok", file:file.name};
+    }
+</script>
+</html>

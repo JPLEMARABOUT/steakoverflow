@@ -4,14 +4,21 @@
   "description": "backend del proyo",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start_user": "node ./users/app.js",
+    "start_restaurant": "node ./restaurants/app.js",
+    "start_recipe": "node ./recipes/app.js",
+    "start_permission": "node ./permissions/app.js",
+    "start_order": "node ./orders/app.js",
+    "start_deliveries": "node ./Deliveries/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "fast-xml-parser": "^4.0.8",
     "jquery": "^3.6.0",
     "jsdom": "^19.0.0",
     "jsonwebtoken": "^8.5.1",
