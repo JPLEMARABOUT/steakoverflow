@@ -4,7 +4,11 @@ import axios from 'axios'
 import router from '@/router'
 import VueCookies from 'vue-cookies'
 
+<<<<<<< HEAD
 let address = 'localhost'
+=======
+let address = '10.169.130.111'
+>>>>>>> frontend
 if (process.env.environement === 'docker') {
   address = 'host.docker.internal'
 }
@@ -44,7 +48,10 @@ export default new Vuex.Store({
 
   },
   actions: {
+<<<<<<< HEAD
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+=======
+>>>>>>> frontend
     createAccount: ({ commit }, userInfos) => {
       instanceUsers.post('/register', userInfos)
         .then(function (response) {
@@ -74,6 +81,33 @@ export default new Vuex.Store({
         .catch(function (error) {
           console.log(error.config)
         })
+<<<<<<< HEAD
+=======
+    },
+    GetListRecipe: (state, RestaurantsInfos) => {
+      const constraint = { restaurant_id: RestaurantsInfos }
+      instanceRecipes.get(`/list_recipes?constraint=${JSON.stringify(constraint)}`)
+        .then(function (response) {
+          console.log(state)
+          return state
+        }
+        )
+        .catch(function (error) {
+          console.log(error.config)
+        })
+    },
+    GetRestaurants: (state, RestaurantsInfos) => {
+      const constraint = { patron: RestaurantsInfos }
+      instanceRestaurants.get(`/get_resto_list?constraint=${JSON.stringify(constraint)}`)
+        .then(function (response) {
+          console.log(state)
+          return state
+        }
+        )
+        .catch(function (error) {
+          console.log(error.config)
+        })
+>>>>>>> frontend
     }
   },
   modules: {

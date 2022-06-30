@@ -38,6 +38,7 @@ export default {
           { text: 'Numéro de commande', value: 'id' },
           { text: 'Produits', value: 'list' },
         ],
+<<<<<<< HEAD
         historic: [
           {
             date: '27/07/2022',
@@ -47,6 +48,9 @@ export default {
             list: ['canard','vin rouge','café'],
           },
         ],
+=======
+        historic: [],
+>>>>>>> frontend
       }
     },
   }

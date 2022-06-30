@@ -141,5 +141,4 @@ async function getUserList(req, res) {
     });
 }
 
-module.exports = {registerUser, updateUser, logUser, getUser, getUserList, deleteUser, changeUserEleveation,
-    confirmAccount, regenToken, getElevationLevelById};
+module.exports = {registerUser, updateUser, logUser, getUser, getUserList, deleteUser, changeUserEleveation, confirmAccount, regenToken, getElevationLevelById};

@@ -138,12 +138,15 @@ export default {
         v => !!v || 'Le champ doit être rempli'
       ],
       select: null,
+<<<<<<< HEAD
       items: [
         'Item 1',
         'Item 2',
         'Item 3',
         'Item 4'
       ],
+=======
+>>>>>>> frontend
       checkbox: false
     }
   },

@@ -19,15 +19,26 @@
             <v-card-text>
               <v-container>
                 <v-row>
+<<<<<<< HEAD
                   <v-col cols="12" sm="1" md="3">
                     <v-text-field required v-model="editedItem.name" label="Nom du menu"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6">
+=======
+                  <v-col cols="12" sm="3" md="3">
+                    <v-text-field required v-model="editedItem.name" label="Nom du menu"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="8" md="6">
+>>>>>>> frontend
                     <v-chip-group center-active multiple show-arrows>
                       <v-chip v-for="n in 4" :key="n" filter outlined>remplace by articles</v-chip>
                     </v-chip-group>
                   </v-col>
+<<<<<<< HEAD
                   <v-col cols="12" sm="6" md="3">
+=======
+                  <v-col cols="12" sm="2" md="3">
+>>>>>>> frontend
                     <v-text-field required v-model="editedItem.price" label="Prix" prefix="€" @keypress="filter(event)"></v-text-field>
                   </v-col>
                 </v-row>
@@ -96,7 +107,11 @@ export default {
       menu: [
         {
           name: 'menu 1',
+<<<<<<< HEAD
           list: ['salade','pizza','tiramisu','café'],
+=======
+          list: [this.GetListRecipe(this.GetRestaurants(($store.state.user.token))).name],
+>>>>>>> frontend
           price: 12.50,
         },
       ],

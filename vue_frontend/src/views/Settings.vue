@@ -61,7 +61,11 @@
                   <v-btn color="green darken-1" text  @click="dialog = false" >
                     Annuler
                   </v-btn>
+<<<<<<< HEAD
                   <v-btn color="error" text @click="dialog = false" :to="{ name: 'home'}">
+=======
+                  <v-btn color="error" text @click="dialog = false" href="/home">
+>>>>>>> frontend
                     Supprimer
                   </v-btn>
                 </v-card-actions>

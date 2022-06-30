@@ -18,8 +18,13 @@
     <v-container class="grey lighten-5 text-center">
       <v-text-field label="Recherche" placeholder="Nom du restaurant"></v-text-field>
     </v-container>
+<<<<<<< HEAD
     <v-row v-for="n in 1" :key="n" rows="12" sm="0">  <!-- 3 -->
       <v-col v-for="n in 1" :key="n" cols="12" sm="3"> <!-- 4 -->
+=======
+    <v-row sm="2">  <!-- v-for="restaurant.id in restaurant" -->
+      <v-col cols="12" sm="3"> <!-- 4 -->
+>>>>>>> frontend
         <v-card :loading="loading" class="mx-auto my-12" max-width="374">
           <template slot="progress">
             <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
@@ -50,11 +55,18 @@
                           <v-row>
                             <v-card-text> <!-- v-for nombre d'articles + menu ici -->
                               restaurant.article1
+<<<<<<< HEAD
                               <v-btn color="primary" @click="add = add - 1">-</v-btn>
                                 {{add}}
                               <v-btn color="primary" @click="add = add + 1">+</v-btn>
                             </v-card-text>
 
+=======
+                              <v-btn color="primary" @click="add = add - 1" :disabled="add == 0">-</v-btn>
+                                {{add}}
+                              <v-btn color="primary" @click="add = add + 1">+</v-btn>
+                            </v-card-text>
+>>>>>>> frontend
                           </v-row>
                         </v-card>
                         <!-- Boutton ajouter / supprimer les produits-->
